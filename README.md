@@ -30,7 +30,6 @@ The data that was used in this study was obtained from publication coffee datase
 
 ## Reproducibility
 The reproducibility documentation of this project can be found here in google colab
-//![link]()
  
  ## Team
 - Bonface Onyango
