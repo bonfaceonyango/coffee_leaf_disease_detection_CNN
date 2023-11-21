@@ -16,7 +16,7 @@ This repository is aimed at using published Arabica coffee leaf images dataset  
 Recognizing coffee diseases in their early stages is crucial to prevent losses and enhance the productivity and quality of coffee plantations.Among these diseases, Coffee Leaf Rust, induced by the Hemileia vastatrix fungus, and Cercospora, also referred to as Brown Eye Spot and caused by the Cercospora coffeicola fungus, stand out as major threats that demand early detection. Additionally, other significant diseases include minor coffee diseases and Phoma, emphasizing the critical need for timely identification. This work seeks to employ deep learning techniques for the identification of primary diseases affecting coffee leaves, aiming to develop an mobile app system that can aid coffee producers in diagnosing these diseases at early stages.
 
 ## Objectives
-1. Develop CNN  model to predict the diseases associated with coffee leaves for instance Miner, Phoma, Cescospora and Rust
+1. Develop CNN  model to detect the Miner, Phoma, Cescospora and Rust coffee diseases.
 2. Use real world coffee datasets to validate and fine tune the model
 3. Deploy the model to mobile App
 ## Data
