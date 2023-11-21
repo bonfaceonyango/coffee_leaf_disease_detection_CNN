@@ -20,7 +20,7 @@ Recognizing coffee diseases in their early stages is crucial to prevent losses a
 2. Use real world coffee datasets to validate and fine tune the model
 3. Deploy the model to mobile App
 ## Data
-The dataset used in this study was obtained from previously published dataset ![link](https://www.sciencedirect.com/science/article/pii/S2352340921004261). The coffee images were taken from  Kirinyaga county-Kenya .
+The dataset used in this study was obtained from previously published dataset ![link](https://www.sciencedirect.com/science/article/pii/S2352340921004261). The coffee images from the published dataset were taken from  Kirinyaga count in Kenya.
 
 ## Methods
 
