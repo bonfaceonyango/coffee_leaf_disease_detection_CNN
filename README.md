@@ -1,7 +1,5 @@
-# coffee_leaf_disease_detection_CNN
-This repository is aimed at using published Arabica coffee leaf images dataset  for coffee leaf disease detection
-# salmonellaml
-Attributing the Source of Salmonella Enterica: A Machine Learning Approach to Understanding Pathogen Surveillance in Africa
+# Coffee leaf disease_detection using Deep Learning 
+This repository is aimed at using published Arabica coffee leaf images dataset  for coffee leaf disease detection. This work is part of Data Science Africa (DSA) data hackathon resolution, where participants were to come up with their own data science problem in Africa and solbe it using African dataset. In this work, we are using published coffee leaft diseased and healthy datasets from Kenya.
 ## Table of Contents
 - [Introduction](#Introduction)
 - [Objectives](#Objectives)
@@ -15,14 +13,14 @@ Attributing the Source of Salmonella Enterica: A Machine Learning Approach to Un
 - [References](#References)
 
 ## Introduction
-Salmonella enterica is a pathogen that can be transmitted from animals to humans through food and is responsible for causing a considerable number of foodborne illnesses worldwide. These illnesses can manifest as gastrointestinal symptoms, fever, abdominal cramps, and, in severe cases, may lead to hospitalization and even deaths. While developed countries have made significant progress in reducing Salmonella infections through improved food safety practices and public health measures, it continues to pose a significant problem in low and middle-income countries. To address these challenges in resource-constrained settings, this project aims to utilize machine learning techniques to predict the sources of Salmonella outbreaks, with a specific focus on Africa. By combining data from various sources, including genomic data, epidemiological records, and environmental factors, the goal is to develop robust predictive models capable of identifying potential sources of Salmonella contamination. This approach could enable targeted interventions, leading to more effective prevention and control strategies.
+Recognizing coffee diseases in their early stages is crucial to prevent losses and enhance the productivity and quality of coffee plantations.Among these diseases, Coffee Leaf Rust, induced by the Hemileia vastatrix fungus, and Cercospora, also referred to as Brown Eye Spot and caused by the Cercospora coffeicola fungus, stand out as major threats that demand early detection. Additionally, other significant diseases include minor coffee diseases and Phoma, emphasizing the critical need for timely identification. This work seeks to employ deep learning techniques for the identification of primary diseases affecting coffee leaves, aiming to develop an mobile app system that can aid coffee producers in diagnosing these diseases at early stages.
 
 ## Objectives
 1. Develop CNN  model to predict the diseases associated with coffee leaves for instance Miner, Phoma, Cescospora and Rust
 2. Use real world coffee datasets to validate and fine tune the model
 3. Deploy the model to mobile App
 ## Data
-The data that was used in this study was obtained from publication coffee dataset ![cofee](https://www.sciencedirect.com/science/article/pii/S2352340921004261). 
+The dataset used in this study was obtained from publication ![cofee](https://www.sciencedirect.com/science/article/pii/S2352340921004261). The coffee images were taken from  Kirinyaga county-Kenya .
 
 ## Methods
 
@@ -30,9 +28,10 @@ The data that was used in this study was obtained from publication coffee datase
 
 ## Reproducibility
 The reproducibility documentation of this project can be found here in google colab
- 
+
  ## Team
-- Bonface Onyango
-- Brenda Muthoni
+- Bonface Onyango ![github](https://github.com/bonfaceonyango)
+- Brenda Muthoni 
+- Henry Ndugwa 
 - Henry Semakula
 
