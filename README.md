@@ -18,7 +18,7 @@ Arabica, the most commonly consumed species of coffee.In Africa  Ethiopia, Ugand
 ## Objectives
 1. Develop CNN  model to detect the Miner, Phoma, Cescospora and Rust coffee diseases.
 2. Deploy the model to mobile App
-3. 2. Use real world coffee datasets to validate and fine tune the model
+3. Use real world coffee datasets to validate and fine tune the model
 ## Data
 The dataset used in this study was obtained from previously published dataset ![link](https://www.sciencedirect.com/science/article/pii/S2352340921004261). The coffee images from the published dataset were taken from  Kirinyaga count in Kenya.
 
