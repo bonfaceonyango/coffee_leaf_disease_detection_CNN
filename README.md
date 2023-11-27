@@ -1,5 +1,5 @@
 # Arabica Coffee Leaf Disease Detection Using Deep Learning 
-This repository is aimed at using published Arabica coffee leaf images dataset  for coffee leaf disease detection. This work is part of Data Science Africa (DSA) 2023 conference data science hackathon resolution, where participants were to come up with their own data science problem in Africa and solve it using African dataset. In this work, we are using published coffee leaft diseased and healthy datasets from Kenya.
+This repository is aimed at using published Arabica coffee leaf images dataset  for coffee leaf disease detection. This work is part of Data Science Africa (DSA) 2023 conference resolution where participants were encouraged to come up with their own data science problem in Africa and solve it using African dataset. In this work, we are using published arabica coffee leaf diseased and healthy datasets from Kenya.
 ## Table of Contents
 - [Introduction](#Introduction)
 - [Objectives](#Objectives)
