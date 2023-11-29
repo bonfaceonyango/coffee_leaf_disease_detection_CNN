@@ -27,3 +27,10 @@ django-admin startproject core .
 python manage.py runserver
 # visit http://localhost:8000/ on your browser
 ```
+
+# Run the server
+
+```
+python manage.py runserver
+
+```
