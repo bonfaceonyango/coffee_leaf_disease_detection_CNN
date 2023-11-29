@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arabica Coffee Leaf Image Prediction Tool</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+  </head>
+
+  <body>
+    <div class="header">
+      <h1><span>Arabica Coffee Leaf Disease Prediction Tool</span> </h1>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input
+        class="custom-file-upload"
+        type="file"
+        accept="image"
+        name="image"
+        id="file"
+      />
+      <button class="compress_image" type="submit" id="submitBtn">
+        Predict Arabica Cofee leaf Disease
+      </button>
+      <div class="status">
+        <p id="message">{{ message }}</p>
+      </div>
+    </form>
+
+    <div class="wrapper">
+      <img
+        src="{% if image_url %}{{ image_url }}{% else %}{% static 'images/default.png' %}{% endif %}"
+        alt="Compressed Image"
+        width="300"
+        height="500"
+      />
+
+      <div class="info_container">
+        <ul>
+          <li>Name: <span class="name">{{ image.name }}</span></li>
+          <li>Prediction: <span class="type">{{ prediction }}</span></li>
+          <li>probability: <span class="probability">{{ prediction_percentage |floatformat:2 }}%</span></li>
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="header">
+      <h4><span>Powered by </span>Mobilenet</h4>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>
