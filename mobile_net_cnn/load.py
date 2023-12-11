@@ -65,7 +65,7 @@ np.save("labels", labels)
 # Function for Loading Test Image
 
 
-def load_image(img_path, target_size=(224, 224), show=False):
+def load_image(img_path, target_size=(150, 150), show=False):
     img = image.load_img(img_path, target_size=target_size)
     img_array = image.img_to_array(img)
     img_tensor = np.expand_dims(img_array, axis=0)
