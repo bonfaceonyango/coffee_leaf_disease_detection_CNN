@@ -8,12 +8,32 @@ from django.utils.datastructures import MultiValueDictKeyError
 # import the load image from the mobilenet folder file named load.py
 from mobile_net_cnn.load import load_image
 from django.core.files.storage import FileSystemStorage
-
+import pandas as pd
 
 class CustomFileSystemStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
         self.delete(name)
         return name
+# get base directory
+# Get the current script's directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Navigate up multiple levels to reach the base path of the app folder
+app_dir = os.path.abspath(os.path.join(script_dir, '..'))
+# cnn_directory = os.path.dirname(os.path.abspath(__file__))
+
+def description(label):
+    # print(f'label:{label}')
+    path_data=os.path.join(app_dir, "assets/condition.csv")
+    df=pd.read_csv(path_data)
+    print(df)
+    predicted=df.groupby("Condition").get_group(label)
+    return predicted
+    # # with open(path_data, 'r') as csv_file:
+    # #     csv_reader = csv.DictReader(csv_file)
+    # #     data = list(csv_reader)
+    
+    # return data
 
 
 def index(request):
@@ -58,6 +78,9 @@ def index(request):
 
         else:
             prediction = "Unknown"
+        # Read CSV file
+        data = description(prediction.replace("_"," "))
+        data=data.to_dict(orient='records')
 
         return TemplateResponse(
             request,
@@ -67,7 +90,13 @@ def index(request):
                 "image": image,
                 "image_url": image_url,
                 "prediction": prediction,
-                "prediction_percentage": prediction_percentage
+                "prediction_percentage": prediction_percentage,
+                "description":data[0].get("Description"),
+                "cause":data[0].get("Cause"),
+                "signs":data[0].get("Symptoms"),
+                "treatment":data[0].get("Treatment")
+
+
             },
         )
 
