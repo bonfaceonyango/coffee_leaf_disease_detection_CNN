@@ -17,11 +17,19 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from .views import index
+# from .views import *
+from . import views
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("", views.function_api, name="index"),
     path("admin/", admin.site.urls),
+   # path("datVisuali/list/<str:statusStaff>/<str:userId>", views.function_api, name="listAppeal")
+    path("api/data/list", views.function_api, name="list_ppeal"),
+    # path("api/data/predict", views.predict_image, name="list_ppeal")
+    path("api/predict/<str:image_url>/", views.predict_image, name="predict_image"),
+    path("api/upload/", views.upload_image, name="upload_image")
+
+
 ]
 
 if settings.DEBUG:
