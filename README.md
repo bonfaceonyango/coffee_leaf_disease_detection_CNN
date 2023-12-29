@@ -8,6 +8,7 @@ This repository is aimed at using published Arabica coffee leaf images dataset f
 - [Objectives](#Objectives)
 - [Data](#Data)
 - [Methods](#Methods)
+- [Example](#Example)
 - [Results](#Results)
 - [Reproducibility](#Reproducibility)
 - [Discussion](#Discussion)
@@ -32,6 +33,10 @@ The dataset used in this study was obtained from previously published dataset ![
 ## Methods
 
 We used Mobilenet pretrained model and fine tuned the parameters and freezed some layers
+
+## Example
+
+![workflow](https://github.com/bonfaceonyango/coffee_leaf_disease_detection_CNN/blob/main/image_prediction.png)
 
 ## Results
 
