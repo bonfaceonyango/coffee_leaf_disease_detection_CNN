@@ -1,6 +1,7 @@
 import os
 import numpy as np
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ValidationError
 
 import tensorflow as tf
 from django.conf import settings
@@ -45,6 +46,7 @@ def upload_image(request):
         if request.method == 'POST' and request.FILES.get('image'):
             # Get the uploaded image from the form
             image = request.FILES["image"]
+            print(request)
 
             # Save the image using CustomFileSystemStorage
             fss = CustomFileSystemStorage()
@@ -82,9 +84,13 @@ def predict_image(request, image_url):
         probability = result[0, predicted_index] * 100
         prediction = labels[predicted_index]
 
-        # Read CSV file
+              # Read CSV file
         data = description(prediction.replace("_", " "))
         data = data.to_dict(orient='records')
+
+        # Set prediction to unknown if probability is less than 50%
+        if probability < 50:
+            prediction = "unknown"
 
         # Construct the API response
         data_res = {
@@ -103,147 +109,62 @@ def predict_image(request, image_url):
         print(f"An error occurred: {e}")
         return JsonResponse({"error": "An error occurred"})
 
-
-
-def function_api(request):
-    # print(request)
+def index(request):
     message = ""
     prediction = ""
     probability = ""
-    fss = CustomFileSystemStorage()
+    image_url = None
+    data = {}
+    print(request)
 
-    try:
-        image = request.FILES["image"]
-        print("Name", image.file)
-        _image = fss.save(image.name, image)
-        path = str(settings.MEDIA_ROOT) + "/" + image.name
-        # image details
-        image_url = fss.url(_image)
-        # Load and preprocess the image using the load_image function
-        test_image = load_image(path, target_size=(224, 224))
+    # if request.method == 'POST':
+    #     try:
+    #         # Get the uploaded image from the form
+    #         image = request.FILES.get("image")
+    #         print("image")
+    #         print(image)
 
-        # Load model
-        model = tf.keras.models.load_model(
-            os.getcwd() + '/mobile_net_cnn/Mobilenet.h5')
+    #         # Check if the image is not None
+    #         if image:
+    #             # # Save the image using CustomFileSystemStorage
+    #             # fss = CustomFileSystemStorage()
+    #             # _image = fss.save(image.name, image)
+    #             # image_url = fss.url(_image)
 
-        result = model.predict(test_image)
+    #             # Call the upload_image API
+    #             upload_response = upload_image(request, image_url)
 
-        # Labels
-        # 'Cerscospora' 0
-        # 'Healthy' 1
-        # 'Leaf_rust' 2
-        # 'Miner' 3
-        # 'Phoma' 4
-        labels = ['Cerscospora', 'Healthy', 'Leaf_rust', 'Miner', 'Phoma']
+    #             # If image is successfully uploaded, call the predict_image API
+    #             if upload_response.get("message") == "Image saved successfully":
+    #                 pass
+    #                 # predict_image(request, image_url)
+    #                 # prediction = data.get("prediction", "")
+    #                 # probability = data.get("probability", "")
 
-        predicted_index = np.argmax(result)
+    #                 # image_url=data.get("image_url")
+    #             else:
+    #                 raise ValidationError("Error uploading image.")
 
-        # Get the probability of the predicted class
-        probability = (result[0, predicted_index])
-        prediction_percentage = probability * 100
-        if 0 <= predicted_index < len(labels):
-            prediction = labels[predicted_index]
+    #         else:
+    #             raise ValidationError("No image selected.")
 
-        else:
-            prediction = "Unknown"
-        # Read CSV file
-        data = description(prediction.replace("_"," "))
-        data=data.to_dict(orient='records')
+    #     except ValidationError as ve:
+    #         message = str(ve)
+    #     except Exception as e:
+    #         print(f"An error occurred while processing image: {e}")
+    #         message = "An error occurred while processing image"
 
-                # image details
-        image_url = fss.url(_image)
-
-        data_res = {
+    return TemplateResponse(
+        request,
+        "index.html",
+        {
             "message": message,
             "image_url": image_url,
             "prediction": prediction,
-            "prediction_percentage": prediction_percentage,
-            "description": data[0].get("Description"),
-            "cause": data[0].get("Cause"),
-            "signs": data[0].get("Symptoms"),
-            "treatment": data[0].get("Treatment")
-        }
-
-        # Serialize the data_res to JSON using DjangoJSONEncoder
-        json_response = JsonResponse(data_res, encoder=DjangoJSONEncoder)
-        return json_response
-        
-
-    except MultiValueDictKeyError:
-        return JsonResponse({"error": "No Image Selected"})
-    except Exception as e:
-        # Log the exception for debugging purposes
-        print(f"An error occurred: {e}")
-        return JsonResponse({"error": "An error occurred"})
-
-   
-
-def index(request):
-    print(request.FILES["image"])
-    message = ""
-    prediction = ""
-    probability = ""
-    fss = CustomFileSystemStorage()
-
-    try:
-        image = request.FILES["image"]
-        print("Name", image.file)
-        _image = fss.save(image.name, image)
-        path = str(settings.MEDIA_ROOT) + "/" + image.name
-        # image details
-        image_url = fss.url(_image)
-        # Load and preprocess the image using the load_image function
-        test_image = load_image(path, target_size=(224, 224))
-
-        # Load model
-        model = tf.keras.models.load_model(
-            os.getcwd() + '/mobile_net_cnn/Mobilenet.h5')
-
-        result = model.predict(test_image)
-
-        # Labels
-        # 'Cerscospora' 0
-        # 'Healthy' 1
-        # 'Leaf_rust' 2
-        # 'Miner' 3
-        # 'Phoma' 4
-        labels = ['Cerscospora', 'Healthy', 'Leaf_rust', 'Miner', 'Phoma']
-
-        predicted_index = np.argmax(result)
-
-        # Get the probability of the predicted class
-        probability = (result[0, predicted_index])
-        prediction_percentage = probability * 100
-        if 0 <= predicted_index < len(labels):
-            prediction = labels[predicted_index]
-
-        else:
-            prediction = "Unknown"
-        # Read CSV file
-        data = description(prediction.replace("_"," "))
-        data=data.to_dict(orient='records')
-
-        return TemplateResponse(
-            request,
-            "index.html",
-            {
-                "message": message,
-                "image": image,
-                "image_url": image_url,
-                "prediction": prediction,
-                "prediction_percentage": prediction_percentage,
-                "description":data[0].get("Description"),
-                "cause":data[0].get("Cause"),
-                "signs":data[0].get("Symptoms"),
-                "treatment":data[0].get("Treatment")
-
-
-            },
-        )
-
-    except MultiValueDictKeyError:
-        return TemplateResponse(
-            request,
-            "index.html",
-            {"message": "No Image Selected"},
-        )
+            "probability": probability,
+            "description": data.get("Description", ""),
+            "cause": data.get("Cause", ""),
+            "signs": data.get("Symptoms", ""),
+            "treatment": data.get("Treatment", "")
+        },
+    )
