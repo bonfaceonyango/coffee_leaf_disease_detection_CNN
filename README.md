@@ -32,7 +32,8 @@ The dataset used in this study was obtained from previously published dataset ![
 
 ## Methods
 
-We used Mobilenet pretrained model and fine tuned the parameters and freezed some layers
+We used Mobilenet, pretrained model and Django Framework
+![workflow](https://github.com/bonfaceonyango/coffee_leaf_disease_detection_CNN/blob/main/workflow.png)
 
 ## Example
 
